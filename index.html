@@ -88,6 +88,14 @@ main blockquote {
 }
 main blockquote p { margin: 0; font-size: 0.92rem; }
 
+.langbar { display: flex; gap: 6px; }
+.langbar button {
+    background: var(--surface); color: var(--text-muted); border: 1px solid var(--border);
+    border-radius: 7px; padding: 0.25rem 0.6rem; font-size: 0.8rem; font-weight: 700; cursor: pointer; letter-spacing: .04em;
+}
+.langbar button:hover { border-color: var(--primary); color: var(--text); }
+.langbar button.is-active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
 .load-error { color: var(--warning); padding: 1rem; border: 1px solid var(--warning); border-radius: 10px; max-width: 62rem; }
 .footer { margin-top: 3rem; color: var(--text-muted); font-size: 0.85rem; }
 
@@ -109,6 +117,11 @@ main blockquote p { margin: 0; font-size: 0.92rem; }
 
 <div class="topbar">
     <a class="brand" href="#top"><svg class="svgi"><use href="#i-spiral"/></svg> Koru Docs</a>
+    <div class="langbar" id="langbar" aria-label="Language">
+        <button data-lang="en">EN</button>
+        <button data-lang="pl">PL</button>
+        <button data-lang="de">DE</button>
+    </div>
     <div class="links">
         <a href="https://www.coru.dev">coru.dev</a>
         <a href="https://about.coru.dev">About</a>
@@ -121,7 +134,7 @@ main blockquote p { margin: 0; font-size: 0.92rem; }
 <nav class="sidebar" id="sidebar"></nav>
 <main id="top">
     <h1 style="font-size:2.4rem"><svg class="svgi" style="color:var(--primary)"><use href="#i-spiral"/></svg> Koru documentation</h1>
-    <p><strong>Koru</strong> is an open-source, fully autonomous refactor loop. These docs are plain Markdown files (<code>content/*.md</code>) rendered in your browser.</p>
+    <p id="intro"></p>
     <div id="content"></div>
     <p class="footer">Apache-2.0 · <a href="https://github.com/semcod/koru">semcod/koru</a> · <a href="https://www.coru.dev">coru.dev</a> · <a href="https://about.coru.dev">about.coru.dev</a> · <a href="https://github.com/tom-sapletta-com/docs-coru-dev">edit these docs</a></p>
 </main>
@@ -213,47 +226,65 @@ function renderMarkdown(md) {
     return out.join('\n');
 }
 
-/* ---- Load manifest + pages, build sidebar, scroll-spy ---- */
-async function boot() {
+/* ---- Language-aware loader: content/<lang>/<file> with EN fallback ---- */
+const LANG_KEY = 'coru-lang';
+const INTRO = {
+    en: '<strong>Koru</strong> is an open-source, fully autonomous refactor loop. These docs are plain Markdown files (<code>content/&lt;lang&gt;/*.md</code>) rendered in your browser.',
+    pl: '<strong>Koru</strong> to otwartoźródłowa, w pełni autonomiczna pętla refaktoryzacji. Ta dokumentacja to zwykłe pliki Markdown (<code>content/&lt;lang&gt;/*.md</code>) renderowane w przeglądarce.',
+    de: '<strong>Koru</strong> ist eine quelloffene, vollständig autonome Refactoring-Schleife. Diese Doku besteht aus Markdown-Dateien (<code>content/&lt;lang&gt;/*.md</code>), die im Browser gerendert werden.',
+};
+
+function detectLang(supported) {
+    try {
+        const saved = localStorage.getItem(LANG_KEY);
+        if (supported.includes(saved)) return saved;
+    } catch (e) {}
+    const nav = (navigator.languages || [navigator.language || 'en']).map((l) => (l || '').slice(0, 2).toLowerCase());
+    return nav.find((l) => supported.includes(l)) || 'en';
+}
+
+let manifest = null;
+
+async function loadPage(lang, file) {
+    for (const dir of [lang, 'en']) {
+        try {
+            const res = await fetch('content/' + dir + '/' + file);
+            if (res.ok) return await res.text();
+        } catch (e) {}
+    }
+    return null;
+}
+
+async function render(lang) {
     const contentEl = document.getElementById('content');
     const sidebar = document.getElementById('sidebar');
-    let manifest;
-    try {
-        manifest = await (await fetch('content/manifest.json')).json();
-    } catch (e) {
-        contentEl.innerHTML = '<div class="load-error">Could not load <code>content/manifest.json</code>. '
-            + 'If you opened this file directly, serve it instead: <code>python3 -m http.server</code></div>';
-        return;
-    }
+    const t = (obj) => (typeof obj === 'string' ? obj : (obj[lang] || obj.en));
+    document.documentElement.lang = lang;
+    document.getElementById('intro').innerHTML = INTRO[lang] || INTRO.en;
+    document.querySelectorAll('#langbar button').forEach((b) => b.classList.toggle('is-active', b.dataset.lang === lang));
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
 
-    const pages = manifest.groups.flatMap((g) => g.pages);
+    sidebar.replaceChildren();
     manifest.groups.forEach((group) => {
         const h = document.createElement('h4');
-        h.textContent = group.title;
+        h.textContent = t(group.title);
         sidebar.appendChild(h);
         group.pages.forEach((page) => {
             const a = document.createElement('a');
             a.href = '#' + page.id;
-            a.textContent = page.title;
+            a.textContent = t(page.title);
             a.dataset.page = page.id;
             sidebar.appendChild(a);
         });
     });
 
-    const results = await Promise.all(pages.map(async (page) => {
-        try {
-            const res = await fetch('content/' + page.file);
-            if (!res.ok) throw new Error(res.status);
-            return { page, md: await res.text() };
-        } catch (e) {
-            return { page, md: '# ' + page.title + '\n\n> Failed to load `' + page.file + '`.' };
-        }
-    }));
-
-    contentEl.innerHTML = results.map(({ page, md }) => {
-        // drop the md H1 (sidebar/manifest owns the title) and re-add as section h2? keep H1 per section
-        return '<section id="' + page.id + '">' + renderMarkdown(md) + '</section>';
-    }).join('\n');
+    const pages = manifest.groups.flatMap((g) => g.pages);
+    const results = await Promise.all(pages.map(async (page) => ({
+        page,
+        md: (await loadPage(lang, page.file)) || ('# ' + t(page.title) + '\n\n> Failed to load `' + page.file + '`.'),
+    })));
+    contentEl.innerHTML = results.map(({ page, md }) =>
+        '<section id="' + page.id + '">' + renderMarkdown(md) + '</section>').join('\n');
 
     const links = Array.from(sidebar.querySelectorAll('a[data-page]'));
     const byId = new Map(links.map((a) => [a.dataset.page, a]));
@@ -266,8 +297,22 @@ async function boot() {
             }
         });
     }, { rootMargin: '-15% 0px -75% 0px' });
-    contentEl.querySelectorAll('section[id]').forEach((s) => observer.observe(s));
+    contentEl.querySelectorAll('section[id]').forEach((sec) => observer.observe(sec));
+}
 
+async function boot() {
+    const contentEl = document.getElementById('content');
+    try {
+        manifest = await (await fetch('content/manifest.json')).json();
+    } catch (e) {
+        contentEl.innerHTML = '<div class="load-error">Could not load <code>content/manifest.json</code>. '
+            + 'If you opened this file directly, serve it instead: <code>python3 -m http.server</code></div>';
+        return;
+    }
+    const supported = manifest.languages || ['en'];
+    document.querySelectorAll('#langbar button').forEach((b) =>
+        b.addEventListener('click', () => render(b.dataset.lang)));
+    await render(detectLang(supported));
     if (location.hash.length > 1) {
         const target = document.getElementById(location.hash.slice(1));
         if (target) target.scrollIntoView();

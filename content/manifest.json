@@ -1,26 +1,27 @@
 {
+  "languages": ["en", "pl", "de"],
   "groups": [
-    { "title": "Start", "pages": [
-      { "id": "overview", "file": "overview.md", "title": "Overview" },
-      { "id": "quickstart", "file": "quickstart.md", "title": "Quickstart" },
-      { "id": "the-loop", "file": "the-loop.md", "title": "The autonomous loop" }
+    { "title": { "en": "Start", "pl": "Start", "de": "Start" }, "pages": [
+      { "id": "overview", "file": "overview.md", "title": { "en": "Overview", "pl": "Przegląd", "de": "Überblick" } },
+      { "id": "quickstart", "file": "quickstart.md", "title": { "en": "Quickstart", "pl": "Szybki start", "de": "Schnellstart" } },
+      { "id": "the-loop", "file": "the-loop.md", "title": { "en": "The autonomous loop", "pl": "Pętla autonomiczna", "de": "Die autonome Schleife" } }
     ]},
-    { "title": "Execution", "pages": [
-      { "id": "lanes", "file": "lanes.md", "title": "Execution lanes" }
+    { "title": { "en": "Execution", "pl": "Wykonanie", "de": "Ausführung" }, "pages": [
+      { "id": "lanes", "file": "lanes.md", "title": { "en": "Execution lanes", "pl": "Tory wykonania", "de": "Ausführungswege" } }
     ]},
-    { "title": "Core concepts", "pages": [
-      { "id": "tickets", "file": "tickets.md", "title": "Tickets & planfile" },
-      { "id": "gates", "file": "gates.md", "title": "Quality gates" },
-      { "id": "dashboard", "file": "dashboard.md", "title": "Dashboard & events" }
+    { "title": { "en": "Core concepts", "pl": "Podstawy", "de": "Kernkonzepte" }, "pages": [
+      { "id": "tickets", "file": "tickets.md", "title": { "en": "Tickets & planfile", "pl": "Tickety i planfile", "de": "Tickets & Planfile" } },
+      { "id": "gates", "file": "gates.md", "title": { "en": "Quality gates", "pl": "Bramki jakości", "de": "Quality Gates" } },
+      { "id": "dashboard", "file": "dashboard.md", "title": { "en": "Dashboard & events", "pl": "Dashboard i zdarzenia", "de": "Dashboard & Events" } }
     ]},
-    { "title": "Reference", "pages": [
-      { "id": "cli", "file": "cli.md", "title": "CLI reference" },
-      { "id": "configuration", "file": "configuration.md", "title": "Configuration & env" },
-      { "id": "ecosystem", "file": "ecosystem.md", "title": "Ecosystem packages" }
+    { "title": { "en": "Reference", "pl": "Referencja", "de": "Referenz" }, "pages": [
+      { "id": "cli", "file": "cli.md", "title": { "en": "CLI reference", "pl": "Komendy CLI", "de": "CLI-Referenz" } },
+      { "id": "configuration", "file": "configuration.md", "title": { "en": "Configuration & env", "pl": "Konfiguracja i env", "de": "Konfiguration & Env" } },
+      { "id": "ecosystem", "file": "ecosystem.md", "title": { "en": "Ecosystem packages", "pl": "Pakiety ekosystemu", "de": "Ökosystem-Pakete" } }
     ]},
-    { "title": "Help", "pages": [
-      { "id": "troubleshooting", "file": "troubleshooting.md", "title": "Troubleshooting" },
-      { "id": "faq", "file": "faq.md", "title": "FAQ" }
+    { "title": { "en": "Help", "pl": "Pomoc", "de": "Hilfe" }, "pages": [
+      { "id": "troubleshooting", "file": "troubleshooting.md", "title": { "en": "Troubleshooting", "pl": "Rozwiązywanie problemów", "de": "Fehlerbehebung" } },
+      { "id": "faq", "file": "faq.md", "title": { "en": "FAQ", "pl": "FAQ", "de": "FAQ" } }
     ]}
   ]
 }
