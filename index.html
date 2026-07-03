@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Koru Docs — docs.coru.dev</title>
-<meta name="description" content="Documentation for Koru — the open-source autonomous refactor loop: quickstart, execution lanes (IDE / vendor CLI / headless LLM), tickets, quality gates, configuration, troubleshooting.">
+<meta name="description" content="Documentation for Koru — the open-source autonomous refactor loop. Markdown-driven docs rendered in the browser.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round'><path d='M12 12a.75.75 0 0 1 .75.75A2.25 2.25 0 0 1 10.5 15 4 4 0 0 1 6.5 11 6 6 0 0 1 12.5 5 8 8 0 0 1 20.5 13 10 10 0 0 1 10.5 23'/></svg>">
 <style>
 :root {
@@ -55,47 +55,41 @@ a:hover { color: #c7d2fe; }
 .sidebar a.is-active { color: var(--text); border-left-color: var(--primary); background: var(--surface); }
 
 main { padding: 1.6rem 0 5rem 2rem; min-width: 0; }
-section[id] { scroll-margin-top: 4.2rem; padding-top: 1.4rem; }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.5em; }
-h2 { font-size: 1.7rem; margin: 1.6em 0 0.55em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
-h3 { font-size: 1.15rem; margin: 1.3em 0 0.4em; }
-p, li { color: var(--text-muted); }
-p strong, li strong, td strong { color: var(--text); }
-ul, ol { margin: 0.5em 0 0.9em 1.3em; }
-main > section > p { max-width: 62rem; }
+main section[id] { scroll-margin-top: 4.2rem; padding-top: 1.4rem; }
+main h1 { font-size: 2rem; margin: 0.5em 0 0.5em; }
+main h2 { font-size: 1.45rem; margin: 1.5em 0 0.5em; padding-bottom: 0.25em; border-bottom: 1px solid var(--border); }
+main h3 { font-size: 1.1rem; margin: 1.2em 0 0.4em; }
+main p, main li { color: var(--text-muted); }
+main strong { color: var(--text); }
+main ul, main ol { margin: 0.5em 0 0.9em 1.3em; }
+main p { max-width: 62rem; margin: 0.4em 0 0.8em; }
 
-code {
+main code {
     font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
     font-size: 0.88em; background: var(--surface); border: 1px solid var(--border);
     border-radius: 5px; padding: 0.08em 0.4em; color: #c7d2fe;
 }
-pre {
+main pre {
     background: #0b1120; border: 1px solid var(--border); border-radius: 10px;
     padding: 0.9rem 1.1rem; overflow-x: auto; margin: 0.7em 0 1.1em;
     max-width: 62rem;
 }
-pre code { background: none; border: 0; padding: 0; color: var(--text-muted); font-size: 0.86rem; line-height: 1.65; }
-pre .c { color: #64748b; } pre .k { color: var(--text); font-weight: 600; } pre .ok { color: var(--success); }
+main pre code { background: none; border: 0; padding: 0; color: var(--text-muted); font-size: 0.86rem; line-height: 1.65; }
 
-table { border-collapse: collapse; margin: 0.7em 0 1.1em; width: 100%; max-width: 62rem; font-size: 0.9rem; }
-th, td { text-align: left; padding: 0.45em 0.8em; border: 1px solid var(--border); vertical-align: top; }
-th { background: var(--surface); color: var(--text); }
-td { color: var(--text-muted); }
-td code { white-space: nowrap; }
+main table { border-collapse: collapse; margin: 0.7em 0 1.1em; width: 100%; max-width: 62rem; font-size: 0.9rem; }
+main th, main td { text-align: left; padding: 0.45em 0.8em; border: 1px solid var(--border); vertical-align: top; }
+main th { background: var(--surface); color: var(--text); }
+main td { color: var(--text-muted); }
 
-.callout {
+main blockquote {
     display: flex; gap: 0.6rem; align-items: flex-start;
     background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.4);
     border-radius: 10px; padding: 0.8rem 1rem; margin: 0.8em 0 1.1em; max-width: 62rem;
 }
-.callout .svgi { color: var(--primary); margin-top: 0.15em; }
-.callout p { margin: 0; font-size: 0.92rem; }
+main blockquote p { margin: 0; font-size: 0.92rem; }
 
-.lanes { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.9rem; margin: 0.8em 0 1.1em; max-width: 70rem; }
-.lane { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.95rem; }
-.lane h3 { margin: 0.25em 0 0.35em; }
-.lane .svgi { color: var(--primary); width: 1.5rem; height: 1.5rem; }
-.lane p { font-size: 0.9rem; }
+.load-error { color: var(--warning); padding: 1rem; border: 1px solid var(--warning); border-radius: 10px; max-width: 62rem; }
+.footer { margin-top: 3rem; color: var(--text-muted); font-size: 0.85rem; }
 
 @media (max-width: 860px) {
     .layout { grid-template-columns: 1fr; }
@@ -109,11 +103,6 @@ td code { white-space: nowrap; }
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
   <defs>
     <symbol id="i-spiral" viewBox="0 0 24 24"><path d="M12 12a.75.75 0 0 1 .75.75A2.25 2.25 0 0 1 10.5 15 4 4 0 0 1 6.5 11 6 6 0 0 1 12.5 5 8 8 0 0 1 20.5 13 10 10 0 0 1 10.5 23"/></symbol>
-    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M4 8h16v3a1.5 1.5 0 0 0 0 3v3H4v-3a1.5 1.5 0 0 0 0-3z"/><path d="M9.5 8v2M9.5 13v1M9.5 16v1" stroke-dasharray="1.5 2.5"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 2.8V11c0 4.7-3.2 7.9-7 10-3.8-2.1-7-5.3-7-10V5.8z"/><path d="M9 11.5l2.2 2.2L15.5 9"/></symbol>
-    <symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M9 4h5v3.2a1.8 1.8 0 1 0 3.6 0V4H20v5h-2.8a1.8 1.8 0 1 0 0 3.6H20V20h-5v-3.2a1.8 1.8 0 1 0-3.6 0V20H4v-5h2.8a1.8 1.8 0 1 0 0-3.6H4V9h5z"/></symbol>
-    <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M6.5 10.5h.01M9.5 10.5h.01M12.5 10.5h.01M15.5 10.5h.01M6.5 13.5h.01M9 13.5h6M17.5 13.5h.01M17.5 10.5h.01"/></symbol>
-    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h13M14 4.5L17.5 8 14 11.5M20 16H7M10 12.5L6.5 16l3.5 3.5"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5M12 7.5h.01"/></symbol>
   </defs>
 </svg>
@@ -129,254 +118,162 @@ td code { white-space: nowrap; }
 </div>
 
 <div class="layout">
-<nav class="sidebar" id="sidebar">
-    <h4>Start</h4>
-    <a href="#overview">Overview</a>
-    <a href="#quickstart">Quickstart</a>
-    <a href="#the-loop">The autonomous loop</a>
-    <h4>Execution</h4>
-    <a href="#lanes">Execution lanes</a>
-    <a href="#ide-lane">External IDE</a>
-    <a href="#cli-lane">Vendor CLI (tillm)</a>
-    <a href="#llm-lane">Headless LLM</a>
-    <h4>Core concepts</h4>
-    <a href="#tickets">Tickets &amp; planfile</a>
-    <a href="#gates">Quality gates</a>
-    <a href="#dashboard">Dashboard &amp; events</a>
-    <h4>Reference</h4>
-    <a href="#cli">CLI reference</a>
-    <a href="#config">Configuration &amp; env</a>
-    <a href="#ecosystem">Ecosystem packages</a>
-    <h4>Help</h4>
-    <a href="#troubleshooting">Troubleshooting</a>
-    <a href="#faq">FAQ</a>
-</nav>
-
+<nav class="sidebar" id="sidebar"></nav>
 <main id="top">
-<h1><svg class="svgi" style="color:var(--primary)"><use href="#i-spiral"/></svg> Koru documentation</h1>
-<p><strong>Koru</strong> is an open-source (Apache-2.0), fully autonomous refactor loop: it detects technical debt, turns findings into tickets, drives an AI executor to fix them, verifies every change with tests and quality gates, and repeats — hands-off.</p>
-
-<section id="overview">
-<h2>Overview</h2>
-<p>One command starts a closed loop over your repository:</p>
-<pre><code><span class="k">Detect → Plan → Execute → Verify → Heal → Learn → Repeat</span></code></pre>
-<ul>
-    <li><strong>Detect</strong> — scanners and quality gates (regix, TestQL, wup, code smells) produce findings.</li>
-    <li><strong>Plan</strong> — findings become scoped, deduplicated <em>planfile tickets</em> in a queue.</li>
-    <li><strong>Execute</strong> — an executor works the ticket: your IDE's chat, a vendor CLI (Claude Code, aider, codex…), or a model API.</li>
-    <li><strong>Verify</strong> — tests + complexity/maintainability thresholds; red means no commit.</li>
-    <li><strong>Heal</strong> — unavailable lanes fall back (plugin → GUI driver → OS input), broken environments self-repair.</li>
-    <li><strong>Learn</strong> — every step lands in an event-sourced JSONL log you can replay and audit.</li>
-</ul>
-</section>
-
-<section id="quickstart">
-<h2>Quickstart</h2>
-<pre><code><span class="k">pip install koru</span>
-<span class="k">koru auto</span></code></pre>
-<p>On a fresh project (no <code>.planfile/</code>) the onboarding wizard asks <strong>one question</strong> about your priority, seeds the first ticket, and starts the loop. Control the interview length with <code>KORU_ONBOARDING_MAX_QUESTIONS</code> (<code>0</code> = no questions, <code>all</code> = full interview) or skip it entirely with <code>KORU_AUTO_SKIP_WIZARD=1</code>.</p>
-<div class="callout"><svg class="svgi"><use href="#i-info"/></svg><p><code>koru auto</code> stops prior loops for the project and starts with <code>--replace-existing</code>. A live dashboard opens at <code>http://127.0.0.1:8765/</code>.</p></div>
-<p>Useful first commands:</p>
-<pre><code><span class="k">koru doctor</span>        <span class="c"># health checks: planfile, lane dependencies, sockets, plugins</span>
-<span class="k">koru serve</span>         <span class="c"># dashboard only (tickets, lanes, event stream)</span>
-<span class="k">koru wizard</span>        <span class="c"># full interactive strategy interview</span></code></pre>
-</section>
-
-<section id="the-loop">
-<h2>The autonomous loop</h2>
-<p>Each cycle of <code>koru auto</code> / <code>koru autonomous up</code>:</p>
-<ol>
-    <li><strong>Scan</strong> (when the queue is idle) — discovery produces new tickets.</li>
-    <li><strong>Queue</strong> — the planfile queue picks the next runnable ticket by priority.</li>
-    <li><strong>Drive</strong> — the ticket prompt is delivered to the selected executor lane.</li>
-    <li><strong>Verify</strong> — post-drive checks (git changes, tests, gates, LLM evaluation of the outcome).</li>
-    <li><strong>Decide</strong> — a decision trace records what was observed, decided, done, and what comes next.</li>
-</ol>
-<p>The loop is conservative by design: it will <em>wait</em> instead of pasting over an active IDE chat (chat-activity cooldown, tune with <code>KORU_AUTOPILOT_REDRIVE_COOLDOWN_SECONDS</code>), it skips redrives when nothing changed, and every skip states its reason in the log.</p>
-</section>
-
-<section id="lanes">
-<h2>Execution lanes</h2>
-<p>The <code>--ide</code> token selects who does the work. One queue, one verification pipeline — the lane is just a setting, and Koru <strong>rescues a failing drive through another lane</strong> when the chosen one is genuinely unavailable.</p>
-<div class="lanes">
-    <div class="lane"><svg class="svgi"><use href="#i-puzzle"/></svg><h3>External IDE</h3><p>Autopilot plugin drives your editor's chat over a Unix socket: Windsurf, VS Code, VSCodium, Cursor, Antigravity (JetBrains via keyboard/OS-injector path).</p></div>
-    <div class="lane"><svg class="svgi"><use href="#i-keyboard"/></svg><h3>Vendor CLI (tillm)</h3><p>Headless shell agents: Claude Code, aider, codex, gemini-cli, cline, opencode, qwen-code, devin. Ideal for servers and CI.</p></div>
-    <div class="lane"><svg class="svgi"><use href="#i-swap"/></svg><h3>Headless LLM</h3><p>Tickets with <code>executor.kind=llm</code> go straight to a model API — OpenRouter (MiniMax, Qwen3-coder, DeepSeek, …) or any local OpenAI-compatible endpoint — with per-run cost tracking.</p></div>
-</div>
-</section>
-
-<section id="ide-lane">
-<h3 style="font-size:1.45rem">External IDE lane</h3>
-<pre><code><span class="k">koru -a --ide windsurf</span>     <span class="c"># or: vscode, vscodium, cursor, antigravity, jetbrains, zed</span></code></pre>
-<ul>
-    <li>The autopilot daemon listens on <code>$XDG_RUNTIME_DIR/koru-autopilot-&lt;ide&gt;.sock</code>; the IDE plugin connects to it.</li>
-    <li>Paste and submit are <em>verified</em> (input probes, sentinel clipboard, bubble checks) — a submit that cannot be confirmed is reported, not assumed.</li>
-    <li>When the plugin is unavailable the drive falls back down the GUI chain: <code>vdisplay → imgl → gillm GuiDriver → nlp2uri focus → OS injector</code>.</li>
-    <li><code>--ide auto</code> picks the lane from the focused/running IDE, terminal host, or project markers.</li>
-</ul>
-</section>
-
-<section id="cli-lane">
-<h3 style="font-size:1.45rem">Vendor CLI lane (tillm)</h3>
-<pre><code><span class="k">koru -a --ide claude</span>                      <span class="c"># drive Claude Code headlessly</span>
-<span class="k">koru -a --ide aider --llm gpt-5.2</span>         <span class="c"># pick the model per run</span></code></pre>
-<ul>
-    <li>On an editor-less host, <code>--ide auto</code> <strong>auto-selects the first vendor CLI found on PATH</strong> (opt out: <code>KORU_AUTO_SHELL_CLIENT=0</code>).</li>
-    <li>If a shell-client token is requested but tillm is missing, startup <strong>aborts loudly</strong> instead of silently driving an editor lane.</li>
-    <li>The autonomy profile defaults to <code>automation</code> (the client may edit files and run checks); override with <code>KORU_TILLM_EXECUTE_PROFILE</code>.</li>
-</ul>
-</section>
-
-<section id="llm-lane">
-<h3 style="font-size:1.45rem">Headless LLM lane</h3>
-<pre><code><span class="k">export OPENROUTER_API_KEY=sk-or-…</span>
-<span class="k">koru auto</span>                                  <span class="c"># tickets with executor.kind=llm use the API</span></code></pre>
-<p>Model selection lives on the ticket (<code>inputs.llm_model</code>) or in project config — e.g. <code>openrouter/qwen/qwen3-coder-next</code>. Cost per run is tracked (the <code>costs</code> package) and can render a badge in your README.</p>
-</section>
-
-<section id="tickets">
-<h2>Tickets &amp; planfile</h2>
-<p>Koru never edits "because it felt like it" — every change traces to a ticket in <code>.planfile/</code> (managed by the <a href="https://pypi.org/project/planfile/">planfile</a> package).</p>
-<pre><code><span class="k">planfile ticket list</span> --status open
-<span class="k">planfile ticket show</span> PLF-001
-<span class="k">planfile ticket create</span> "Reduce CC in parser.py" -d "…" --priority high
-<span class="k">planfile ticket done</span> PLF-001</code></pre>
-<ul>
-    <li><strong>Executors</strong>: <code>human</code> (waits for you), <code>shell</code> (runs a command), <code>llm</code> (calls a model API), IDE drive (default for refactor prompts).</li>
-    <li><strong>Deduplication</strong>: gate findings carry a stable <code>[gate-finding:&lt;key&gt;]</code> marker — a still-failing gate appends a note instead of creating a duplicate.</li>
-    <li><strong>Safety</strong>: <code>ticket create</code> refuses unfilled template placeholders like <code>&lt;finding_key&gt;</code> (override: <code>--force</code>).</li>
-</ul>
-</section>
-
-<section id="gates">
-<h2>Quality gates</h2>
-<table>
-    <tr><th>Gate</th><th>Answers</th><th>Tool</th></tr>
-    <tr><td><strong>regix</strong></td><td>Did a quality metric regress? Hard thresholds: cyclomatic complexity ≤ 15, maintainability index ≥ 20 (targets: CC ≤ 10, MI ≥ 30, docstrings ≥ 80%). Violations name <code>file::symbol</code>.</td><td><code>regix gates</code></td></tr>
-    <tr><td><strong>TestQL</strong></td><td>Did behavior regress? Scenario probes against live endpoints.</td><td><code>testql run …</code></td></tr>
-    <tr><td><strong>wup</strong></td><td>Is the on-change watcher up, covering incremental edits?</td><td><code>wup status</code></td></tr>
-</table>
-<p>Red gates do two things: <strong>block the commit</strong> and <strong>create a deduplicated ticket</strong> (via <code>scripts/koru-gate-capture.py</code>) with the exact failing line and the command that produced it — so the loop fixes findings instead of accumulating them.</p>
-</section>
-
-<section id="dashboard">
-<h2>Dashboard &amp; events</h2>
-<pre><code><span class="k">koru serve</span>          <span class="c"># http://127.0.0.1:8765/ (falls back to the next free port)</span></code></pre>
-<ul>
-    <li><strong>Overview</strong> — project picker, IDE-lane picker (editors <em>and</em> detected vendor CLIs), LLM/IDE lanes table with availability.</li>
-    <li><strong>Tickets</strong> — live queue state, per-ticket history.</li>
-    <li><strong>Events</strong> — the event-sourced JSONL store (<code>.koru/event-store.jsonl</code>, observability stream in <code>.koru/events/</code>): every scan, drive, decision, and skip with its reason. Replay with <code>koru replay</code>.</li>
-</ul>
-</section>
-
-<section id="cli">
-<h2>CLI reference (most used)</h2>
-<table>
-    <tr><th>Command</th><th>What it does</th></tr>
-    <tr><td><code>koru auto</code> / <code>koru -a</code></td><td>Stop prior loops, onboard if needed, start the autonomous cycle.</td></tr>
-    <tr><td><code>koru -a --ide &lt;token&gt;</code></td><td>Pick the lane: editor id, shell client id, or <code>auto</code>.</td></tr>
-    <tr><td><code>koru -a --llm &lt;model&gt;</code></td><td>Force the model for shell-client lanes.</td></tr>
-    <tr><td><code>koru doctor</code></td><td>Diagnostics: planfile binary/pin, <strong>lane dependencies</strong>, sockets, plugin bundle, IDE runtime.</td></tr>
-    <tr><td><code>koru scan --apply</code></td><td>One discovery pass; findings become tickets.</td></tr>
-    <tr><td><code>koru wizard</code></td><td>Full strategy interview (multi-question).</td></tr>
-    <tr><td><code>koru serve</code> / <code>koru dashboard</code></td><td>Dashboard + REST API.</td></tr>
-    <tr><td><code>koru autopilot drive --ide X 'text'</code></td><td>One manual drive (for testing a lane).</td></tr>
-    <tr><td><code>koru autopilot env --ide X</code></td><td>Print lane env exports for your shell.</td></tr>
-</table>
-</section>
-
-<section id="config">
-<h2>Configuration &amp; environment</h2>
-<h3>koru.yaml (project)</h3>
-<pre><code>ide_integration:
-  default_lane: windsurf
-  lanes:
-    windsurf: { backend: plugin_socket, ide: windsurf }
-    cursor:   { backend: mcp_tool, mcp_server: koru }
-autonomy:
-  strategy: accordion_detail_to_general</code></pre>
-<h3>Key environment variables</h3>
-<table>
-    <tr><th>Variable</th><th>Effect</th></tr>
-    <tr><td><code>KORU_AUTOPILOT_INSTANCE</code></td><td>Pin the autopilot lane/instance (e.g. <code>cursor-main</code>). Wins over autodetection.</td></tr>
-    <tr><td><code>KORU_TILLM_CLIENT</code> / <code>KORU_TILLM_MODEL</code></td><td>Shell client id / model for the tillm lane.</td></tr>
-    <tr><td><code>KORU_TILLM_EXECUTE_PROFILE</code></td><td><code>default</code> (read-only-ish) or <code>automation</code> (edit + run checks; autonomy default).</td></tr>
-    <tr><td><code>KORU_AUTO_SHELL_CLIENT=0</code></td><td>Disable auto-picking a vendor CLI on editor-less hosts.</td></tr>
-    <tr><td><code>KORU_ONBOARDING_MAX_QUESTIONS</code></td><td>Wizard question budget on first <code>koru auto</code> (default <code>1</code>; <code>0</code> none, <code>all</code> full interview).</td></tr>
-    <tr><td><code>KORU_AUTO_SKIP_WIZARD=1</code></td><td>Skip onboarding entirely.</td></tr>
-    <tr><td><code>KORU_PLANFILE_CMD</code></td><td>Pin the planfile CLI. If the pinned env lacks the module, Koru warns once and falls back to auto-resolution.</td></tr>
-    <tr><td><code>KORU_AUTOPILOT_REDRIVE_COOLDOWN_SECONDS</code></td><td>Chat-activity cooldown before a redrive (default 300).</td></tr>
-    <tr><td><code>KORU_OS_INJECTOR=1</code></td><td>Explicitly enable the keyboard/OS-injector fallback on Wayland.</td></tr>
-    <tr><td><code>KORU_STDIO_FORMAT</code></td><td><code>human</code> or <code>jsonl</code> event output.</td></tr>
-    <tr><td><code>KORU_TILLM_PATH</code></td><td>Dev-checkout path for tillm (installed setups don't need it).</td></tr>
-</table>
-</section>
-
-<section id="ecosystem">
-<h2>Ecosystem packages</h2>
-<table>
-    <tr><th>Package</th><th>Role</th></tr>
-    <tr><td><strong>koru</strong></td><td>The loop: queue, cycles, drive orchestration, dashboard, doctor.</td></tr>
-    <tr><td><strong>planfile</strong></td><td>Tickets, sprints, queue — the audit backbone.</td></tr>
-    <tr><td><strong>tillm</strong></td><td>Shell-LLM client registry &amp; drivers (zero-dependency; a core dependency of koru).</td></tr>
-    <tr><td><strong>gillm</strong></td><td>GUI injection: keyboard/mouse drivers, recovery classification.</td></tr>
-    <tr><td><strong>koruide</strong></td><td>IDE identity &amp; control plane: detection, aliases, plugin daemon protocol.</td></tr>
-    <tr><td><strong>vdisplay</strong></td><td>Screen truth: captures, VQL element maps, verified GUI actuation.</td></tr>
-    <tr><td><strong>regix / testql / wup</strong></td><td>Quality, behavior, and on-change gates.</td></tr>
-    <tr><td><strong>goal</strong></td><td>Repo automation: deps → diagnose → test → commit/publish.</td></tr>
-</table>
-</section>
-
-<section id="troubleshooting">
-<h2>Troubleshooting</h2>
-<h3>Start with the doctor</h3>
-<pre><code><span class="k">koru doctor</span>
-<span class="ok">planfile_binary → pass</span>
-<span class="ok">lane_dependencies → pass | tillm=yes; gillm=yes</span></code></pre>
-<ul>
-    <li><strong><code>--ide claude</code> says tillm is unavailable</strong> — <code>pip install tillm</code> in the same environment as koru (it's a core dependency of recent versions; older installs may miss it).</li>
-    <li><strong>Queue errors "No module named planfile"</strong> — your <code>KORU_PLANFILE_CMD</code> points at an env without planfile; recent koru falls back automatically and warns. Install planfile there or unset the pin.</li>
-    <li><strong>Loop pastes into the wrong window / nothing happens on Wayland</strong> — run <code>koru autopilot prepare-vdisplay --ide &lt;ide&gt;</code> and calibrate; blind OS-injector clicks are refused unless <code>KORU_ALLOW_BLIND_KEYBOARD_FALLBACK=1</code>.</li>
-    <li><strong><code>koru -a: unrecognized arguments</code></strong> — an old koru on PATH (check <code>koru --version</code>, then <code>pip install -U koru</code> in <em>that</em> environment). Multiple Pythons (conda/pyenv/venv) are the usual cause.</li>
-    <li><strong>Daemon version mismatch</strong> — the loop restarts stale daemons automatically; persistent mismatches mean two different koru installs are fighting — align them.</li>
-    <li><strong>Ticket stuck in <code>waiting_input</code></strong> — it's an <code>executor=human</code> ticket: answer it in the IDE, or <code>koru replay 'ticket input PLF-…'</code>, or close it.</li>
-</ul>
-<h3>Keep the toolchain fresh in loop environments</h3>
-<pre><code><span class="c"># pyproject.toml of the project running the loop (uv default group):</span>
-[dependency-groups]
-dev = ["koru>=0.1.366", "goal>=2.1.264", "planfile>=0.1.104", "tillm>=0.1.37"]</code></pre>
-<p>Then every <code>goal -au</code> run (<code>uv sync --upgrade</code>) upgrades the tools; a running loop picks new versions up on its next restart.</p>
-</section>
-
-<section id="faq">
-<h2>FAQ</h2>
-<h3>Does Koru commit unverified changes?</h3>
-<p>No. Verification (tests + gates) runs before commit; red blocks. Failures become tickets, not silent regressions.</p>
-<h3>Can I run it fully offline?</h3>
-<p>Yes — pair it with a local OpenAI-compatible endpoint for the LLM lane, or a local CLI agent. No telemetry.</p>
-<h3>Which models work?</h3>
-<p>Any model your executor can use: your IDE's built-in models, vendor CLIs' models (<code>--llm</code> to force one), or any OpenRouter/local model id for <code>executor.kind=llm</code> tickets.</p>
-<h3>How do I stop the loop?</h3>
-<p><code>Ctrl+C</code> in its terminal, or start a replacement with <code>koru auto</code> (it stops prior managed processes). State is checkpointed — the next start resumes the queue.</p>
-</section>
-
-<p style="margin-top:3rem;color:var(--text-muted);font-size:0.85rem">Apache-2.0 · <a href="https://github.com/semcod/koru">semcod/koru</a> · <a href="https://www.coru.dev">coru.dev</a> · <a href="https://about.coru.dev">about.coru.dev</a></p>
+    <h1 style="font-size:2.4rem"><svg class="svgi" style="color:var(--primary)"><use href="#i-spiral"/></svg> Koru documentation</h1>
+    <p><strong>Koru</strong> is an open-source, fully autonomous refactor loop. These docs are plain Markdown files (<code>content/*.md</code>) rendered in your browser.</p>
+    <div id="content"></div>
+    <p class="footer">Apache-2.0 · <a href="https://github.com/semcod/koru">semcod/koru</a> · <a href="https://www.coru.dev">coru.dev</a> · <a href="https://about.coru.dev">about.coru.dev</a> · <a href="https://github.com/tom-sapletta-com/docs-coru-dev">edit these docs</a></p>
 </main>
 </div>
 
 <script>
-const links = Array.from(document.querySelectorAll('.sidebar a'));
-const map = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-        if (e.isIntersecting) {
-            links.forEach((a) => a.classList.remove('is-active'));
-            const link = map.get(e.target.id);
-            if (link) link.classList.add('is-active');
+/* ---- Minimal Markdown renderer (headings, lists, tables, fences,
+        blockquote callouts, inline code/bold/italic/links) ---- */
+function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function inline(s) {
+    // order matters: code spans first so their contents stay literal
+    s = s.replace(/`([^`]+)`/g, (_, c) => '<code>' + c + '</code>');
+    s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/(^|[\s(])\*([^*\s][^*]*)\*(?=[\s).,;:!?]|$)/g, '$1<em>$2</em>');
+    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, u) =>
+        '<a href="' + u + '"' + (u.startsWith('http') ? ' target="_blank" rel="noopener"' : '') + '>' + t + '</a>');
+    return s;
+}
+
+function renderMarkdown(md) {
+    const lines = md.split(/\r?\n/);
+    const out = [];
+    let i = 0, list = null, para = [];
+
+    const flushPara = () => {
+        if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; }
+    };
+    const flushList = () => {
+        if (list) { out.push('</' + list + '>'); list = null; }
+    };
+
+    while (i < lines.length) {
+        const line = lines[i];
+
+        if (/^```/.test(line)) {                      // fenced code
+            flushPara(); flushList();
+            const buf = [];
+            i += 1;
+            while (i < lines.length && !/^```/.test(lines[i])) { buf.push(lines[i]); i += 1; }
+            i += 1;
+            out.push('<pre><code>' + escapeHtml(buf.join('\n')) + '</code></pre>');
+            continue;
         }
+        if (/^\|/.test(line)) {                       // table
+            flushPara(); flushList();
+            const rows = [];
+            while (i < lines.length && /^\|/.test(lines[i])) { rows.push(lines[i]); i += 1; }
+            const cells = (r) => r.replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
+            let html = '<table>';
+            rows.forEach((r, k) => {
+                if (/^\|[\s:-]+\|/.test(r) && /-/.test(r)) return;   // separator row
+                const tag = k === 0 ? 'th' : 'td';
+                html += '<tr>' + cells(r).map((c) => '<' + tag + '>' + inline(escapeHtml(c)) + '</' + tag + '>').join('') + '</tr>';
+            });
+            out.push(html + '</table>');
+            continue;
+        }
+        let m;
+        if ((m = line.match(/^(#{1,3})\s+(.*)$/))) {  // headings
+            flushPara(); flushList();
+            const level = m[1].length;
+            out.push('<h' + level + '>' + inline(escapeHtml(m[2])) + '</h' + level + '>');
+        } else if ((m = line.match(/^>\s?(.*)$/))) {  // callout
+            flushPara(); flushList();
+            const buf = [m[1]];
+            while (i + 1 < lines.length && /^>\s?/.test(lines[i + 1])) { i += 1; buf.push(lines[i].replace(/^>\s?/, '')); }
+            out.push('<blockquote><svg class="svgi" style="color:var(--primary)"><use href="#i-info"/></svg><p>'
+                     + inline(escapeHtml(buf.join(' '))) + '</p></blockquote>');
+        } else if ((m = line.match(/^[-*]\s+(.*)$/))) {   // ul
+            flushPara();
+            if (list !== 'ul') { flushList(); out.push('<ul>'); list = 'ul'; }
+            out.push('<li>' + inline(escapeHtml(m[1])) + '</li>');
+        } else if ((m = line.match(/^\d+\.\s+(.*)$/))) {  // ol
+            flushPara();
+            if (list !== 'ol') { flushList(); out.push('<ol>'); list = 'ol'; }
+            out.push('<li>' + inline(escapeHtml(m[1])) + '</li>');
+        } else if (!line.trim()) {
+            flushPara(); flushList();
+        } else {
+            flushList();
+            para.push(escapeHtml(line.trim()));
+        }
+        i += 1;
+    }
+    flushPara(); flushList();
+    return out.join('\n');
+}
+
+/* ---- Load manifest + pages, build sidebar, scroll-spy ---- */
+async function boot() {
+    const contentEl = document.getElementById('content');
+    const sidebar = document.getElementById('sidebar');
+    let manifest;
+    try {
+        manifest = await (await fetch('content/manifest.json')).json();
+    } catch (e) {
+        contentEl.innerHTML = '<div class="load-error">Could not load <code>content/manifest.json</code>. '
+            + 'If you opened this file directly, serve it instead: <code>python3 -m http.server</code></div>';
+        return;
+    }
+
+    const pages = manifest.groups.flatMap((g) => g.pages);
+    manifest.groups.forEach((group) => {
+        const h = document.createElement('h4');
+        h.textContent = group.title;
+        sidebar.appendChild(h);
+        group.pages.forEach((page) => {
+            const a = document.createElement('a');
+            a.href = '#' + page.id;
+            a.textContent = page.title;
+            a.dataset.page = page.id;
+            sidebar.appendChild(a);
+        });
     });
-}, { rootMargin: '-15% 0px -75% 0px' });
-document.querySelectorAll('main section[id]').forEach((s) => observer.observe(s));
+
+    const results = await Promise.all(pages.map(async (page) => {
+        try {
+            const res = await fetch('content/' + page.file);
+            if (!res.ok) throw new Error(res.status);
+            return { page, md: await res.text() };
+        } catch (e) {
+            return { page, md: '# ' + page.title + '\n\n> Failed to load `' + page.file + '`.' };
+        }
+    }));
+
+    contentEl.innerHTML = results.map(({ page, md }) => {
+        // drop the md H1 (sidebar/manifest owns the title) and re-add as section h2? keep H1 per section
+        return '<section id="' + page.id + '">' + renderMarkdown(md) + '</section>';
+    }).join('\n');
+
+    const links = Array.from(sidebar.querySelectorAll('a[data-page]'));
+    const byId = new Map(links.map((a) => [a.dataset.page, a]));
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+            if (e.isIntersecting) {
+                links.forEach((a) => a.classList.remove('is-active'));
+                const link = byId.get(e.target.id);
+                if (link) link.classList.add('is-active');
+            }
+        });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+    contentEl.querySelectorAll('section[id]').forEach((s) => observer.observe(s));
+
+    if (location.hash.length > 1) {
+        const target = document.getElementById(location.hash.slice(1));
+        if (target) target.scrollIntoView();
+    }
+}
+boot();
 </script>
 </body>
 </html>

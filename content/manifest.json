@@ -1,0 +1,26 @@
+{
+  "groups": [
+    { "title": "Start", "pages": [
+      { "id": "overview", "file": "overview.md", "title": "Overview" },
+      { "id": "quickstart", "file": "quickstart.md", "title": "Quickstart" },
+      { "id": "the-loop", "file": "the-loop.md", "title": "The autonomous loop" }
+    ]},
+    { "title": "Execution", "pages": [
+      { "id": "lanes", "file": "lanes.md", "title": "Execution lanes" }
+    ]},
+    { "title": "Core concepts", "pages": [
+      { "id": "tickets", "file": "tickets.md", "title": "Tickets & planfile" },
+      { "id": "gates", "file": "gates.md", "title": "Quality gates" },
+      { "id": "dashboard", "file": "dashboard.md", "title": "Dashboard & events" }
+    ]},
+    { "title": "Reference", "pages": [
+      { "id": "cli", "file": "cli.md", "title": "CLI reference" },
+      { "id": "configuration", "file": "configuration.md", "title": "Configuration & env" },
+      { "id": "ecosystem", "file": "ecosystem.md", "title": "Ecosystem packages" }
+    ]},
+    { "title": "Help", "pages": [
+      { "id": "troubleshooting", "file": "troubleshooting.md", "title": "Troubleshooting" },
+      { "id": "faq", "file": "faq.md", "title": "FAQ" }
+    ]}
+  ]
+}
